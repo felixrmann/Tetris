@@ -1,5 +1,6 @@
 package Tetris.Handler;
 
+import Tetris.Model.Map.GameMap;
 import Tetris.Model.Shapes.*;
 import Tetris.View.GameFrame;
 
@@ -14,6 +15,7 @@ import java.util.Observer;
 
 public class GameHandler implements Observer {
     private GameFrame gameFrame;
+    private GameMap gameMap;
     private Shape currentShape, nextShape;
     private ShapeHandler shapeHandler;
     private ShapeOutHandler shapeOutHandler;
@@ -24,6 +26,8 @@ public class GameHandler implements Observer {
 
     public GameHandler(GameFrame gameFrame){
         this.gameFrame = gameFrame;
+
+        gameMap = gameFrame.getMap();
 
         impactHandler = new ImpactHandler(gameFrame.getMap());
 
@@ -100,30 +104,67 @@ public class GameHandler implements Observer {
                         break;
                     case "a":
                         if (takeInput){
-                            if (!(currentShape.getxPos() - 1 < 0)){
-                                currentShape.aDirection();
-                                shapeHandler.printShape(currentShape);
-                                renderMap();
+                            if (!((currentShape.getxPos() - 1) < 0)){
+                                Shape temp = shapeOutHandler.getShape(currentShape.getShapeColor());
+                                temp.setRotation(currentShape.getRotation());
+                                temp.aDirection();
+                                int[][] testArray = temp.getPrintShape(temp.getRotation());
+                                boolean check = true;
+
+                                for (int i = 0; i < 4; i++) {
+                                    if (!(gameMap.getField(currentShape.getyPos() + testArray[0][i], temp.getxPos() + testArray[1][i]).equals(" "))){
+                                        check = false;
+                                        break;
+                                    }
+                                }
+                                if (check){
+                                    currentShape.aDirection();
+                                    shapeHandler.printShape(currentShape);
+                                    renderMap();
+                                }
                             }
                         }
                         break;
                     case "d":
                         if (takeInput){
                             if (!(currentShape.getxPos() + 1 > (10 - currentShape.getWidth()))){
-                                currentShape.dDirection();
-                                shapeHandler.printShape(currentShape);
-                                renderMap();
+                                Shape temp = shapeOutHandler.getShape(currentShape.getShapeColor());
+                                temp.setRotation(currentShape.getRotation());
+                                temp.dDirection();
+                                int[][] testArray = temp.getPrintShape(temp.getRotation());
+                                boolean check = true;
+
+                                for (int i = 0; i < 4; i++) {
+                                    if (!(gameMap.getField(currentShape.getyPos() + testArray[0][i], temp.getxPos() + testArray[1][i]).equals(" "))){
+                                        check = false;
+                                        break;
+                                    }
+                                }
+                                if (check){
+                                    currentShape.dDirection();
+                                    shapeHandler.printShape(currentShape);
+                                    renderMap();
+                                }
                             }
                         }
                         break;
                     case "e":
                         if (takeInput){
+                            boolean check = true;
                             Shape temp1 = shapeOutHandler.getShape(currentShape.getShapeColor());
                             temp1.setRotation(currentShape.getRotation());
                             temp1.turnRight();
                             temp1.getPrintShape(temp1.getRotation());
+                            int[][] testArray = temp1.getPrintShape(temp1.getRotation());
 
-                            if (!(currentShape.getxPos() + temp1.getWidth() > 10)){
+
+                            for (int i = 0; i < 4; i++) {
+                                if (!(gameMap.getField(currentShape.getyPos() + testArray[0][i], temp1.getxPos() + testArray[1][i]).equals(" "))) {
+                                    check = false;
+                                    break;
+                                }
+                            }
+                            if (!(currentShape.getxPos() + temp1.getWidth() > 10) && check){
                                 currentShape.turnRight();
                                 shapeHandler.printShape(currentShape);
                                 renderMap();
