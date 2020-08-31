@@ -33,7 +33,7 @@ public class RowHandler {
                 cnt++;
                 trueRows[trueCnt] = i;
                 trueCnt++;
-            };
+            }
         }
 
         if (cnt > 0){
@@ -54,6 +54,7 @@ public class RowHandler {
 
             for (int i = 0; i < cnt; i++) {
                 for (int x = 0; x < 10; x++) {
+                    gameMap.setFieldTemp(trueRows[i], x, " ");
                     gameMap.setFieldSet(trueRows[i], x, " ");
                 }
             }

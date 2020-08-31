@@ -46,11 +46,11 @@ public class GameMap {
             {" "," "," "," "," "," "," "," "," "," "},
             {" "," "," "," "," "," "," "," "," "," "},
             {" "," "," "," "," "," "," "," "," "," "},
-            {" "," "," "," ","g"," "," "," "," "," "},
-            {" "," "," "," ","g"," "," "," "," "," "},
-            {" "," "," "," ","g"," "," "," "," "," "},
-            {" "," "," "," ","g"," "," "," "," "," "},
-            {" "," "," "," ","g"," "," "," "," "," "}
+            {" "," "," "," "," "," "," "," "," "," "},
+            {" "," "," "," "," "," "," "," "," "," "},
+            {" "," "," "," "," "," "," "," "," "," "},
+            {" "," "," "," "," "," "," "," "," "," "},
+            {"g","g","g","g","g","g","g","g","g"," "}
     };
 
     public void coppySetMap(){
@@ -63,8 +63,12 @@ public class GameMap {
         tempMap[yPos][xPos] = color;
     }
 
-    public void setFieldSet(int yPos, int xPos, String color){
+    public void setFieldTemp(int yPos, int xPos, String color){
         tempMap[yPos][xPos] = color;
+    }
+
+    public void setFieldSet(int yPos, int xPos, String color){
+        setMap[yPos][xPos] = color;
     }
 
     public String getField(int yPos, int xPos){

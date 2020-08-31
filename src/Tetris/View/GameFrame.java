@@ -56,6 +56,9 @@ public class GameFrame extends JFrame {
     }
 
     private void init() {
+        //TODO show points
+        //TODO show next shape
+        //TODO make it look better
         getContentPane().add(mainPanel);
 
         mainPanel.setLayout(new BorderLayout(10,10));

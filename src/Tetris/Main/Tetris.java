@@ -10,6 +10,7 @@ import Tetris.View.GameFrame;
 
 public class Tetris {
     public static void main(String[] args) {
+        //TODO cant move after row deleate (dunno why)
         new GameFrame();
     }
 }
