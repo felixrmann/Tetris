@@ -21,6 +21,8 @@ public class GameFrame extends JFrame {
     private GameHandler gameHandler;
     private InputHandler inputHandler;
     private JPanel mainPanel, gamePanel;
+    private NextShapePanel nextShapePanel;
+    private PointsPanel pointsPanel;
     private Timer timer;
     private int globalSpeed;
 
@@ -34,6 +36,8 @@ public class GameFrame extends JFrame {
         inputHandler.addObserver(gameHandler);
         mainPanel = new JPanel();
         gamePanel = new JPanel();
+        nextShapePanel = new NextShapePanel(gameHandler);
+        pointsPanel = new PointsPanel();
 
         globalSpeed = 500;
 
@@ -42,7 +46,7 @@ public class GameFrame extends JFrame {
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setTitle("Tetris");
         setResizable(false);
-        setSize(600, 850);
+        setSize(1000, 1000);
         setLocationRelativeTo(null);
         setVisible(true);
 
@@ -65,11 +69,21 @@ public class GameFrame extends JFrame {
         mainPanel.add(gamePanel, BorderLayout.CENTER);
 
         gamePanel.setLayout(new BorderLayout());
-        gamePanel.add(new FieldPrinter(map));
+        gamePanel.add(nextShapePanel, BorderLayout.WEST);
+        gamePanel.add(new FieldPrinter(map), BorderLayout.CENTER);
+        gamePanel.add(pointsPanel, BorderLayout.EAST);
     }
 
     public JPanel getGamePanel() {
         return gamePanel;
+    }
+
+    public NextShapePanel getNextShapePanel(){
+        return nextShapePanel;
+    }
+
+    public PointsPanel getPointsPanel(){
+        return pointsPanel;
     }
 
     public GameMap getMap() {

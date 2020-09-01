@@ -2,8 +2,11 @@ package Tetris.Handler;
 
 import Tetris.Model.Map.GameMap;
 import Tetris.Model.Shapes.*;
+import Tetris.Model.Shapes.Shape;
 import Tetris.View.GameFrame;
 
+import javax.swing.*;
+import java.awt.*;
 import java.util.Observable;
 import java.util.Observer;
 
@@ -55,7 +58,12 @@ public class GameHandler implements Observer {
 
     public void renderMap(){
         gameFrame.getGamePanel().removeAll();
-        gameFrame.getGamePanel().add(new FieldPrinter(gameFrame.getMap()));
+
+        gameFrame.getGamePanel().setLayout(new BorderLayout());
+        gameFrame.getGamePanel().add(gameFrame.getNextShapePanel(), BorderLayout.WEST);
+        gameFrame.getGamePanel().add(new FieldPrinter(gameMap), BorderLayout.CENTER);
+        gameFrame.getGamePanel().add(gameFrame.getPointsPanel(), BorderLayout.EAST);
+
         gameFrame.getGamePanel().revalidate();
     }
 
@@ -65,6 +73,10 @@ public class GameHandler implements Observer {
 
     public Shape getNextShape() {
         return nextShape;
+    }
+
+    public ShapeOutHandler getShapeOutHandler(){
+        return shapeOutHandler;
     }
 
     public void updateShape(){
