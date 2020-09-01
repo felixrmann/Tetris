@@ -46,10 +46,11 @@ public class GameFrame extends JFrame {
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setTitle("Tetris");
         setResizable(false);
-        setSize(1000, 1000);
+        setSize(1000, 850);
         setLocationRelativeTo(null);
         setVisible(true);
 
+        /*
         timer = new Timer();
         timer.scheduleAtFixedRate(new TimerTask() {
             @Override
@@ -57,6 +58,8 @@ public class GameFrame extends JFrame {
                 gameHandler.gameRepeat();
             }
         }, 1000, globalSpeed);
+
+         */
     }
 
     private void init() {
@@ -68,7 +71,7 @@ public class GameFrame extends JFrame {
         mainPanel.setLayout(new BorderLayout(10,10));
         mainPanel.add(gamePanel, BorderLayout.CENTER);
 
-        gamePanel.setLayout(new BorderLayout());
+        gamePanel.setLayout(new BorderLayout(10,10));
         gamePanel.add(nextShapePanel, BorderLayout.WEST);
         gamePanel.add(new FieldPrinter(map), BorderLayout.CENTER);
         gamePanel.add(pointsPanel, BorderLayout.EAST);
