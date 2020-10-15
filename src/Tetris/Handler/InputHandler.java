@@ -15,7 +15,6 @@ import java.util.Observable;
 public class InputHandler extends Observable {
 
     public InputHandler(GameFrame gameFrame){
-
         gameFrame.addKeyListener(new KeyAdapter() {
             @Override
             public void keyTyped(KeyEvent e) {

@@ -50,7 +50,6 @@ public class GameFrame extends JFrame {
         setLocationRelativeTo(null);
         setVisible(true);
 
-        /*
         timer = new Timer();
         timer.scheduleAtFixedRate(new TimerTask() {
             @Override
@@ -59,7 +58,7 @@ public class GameFrame extends JFrame {
             }
         }, 1000, globalSpeed);
 
-         */
+
     }
 
     private void init() {

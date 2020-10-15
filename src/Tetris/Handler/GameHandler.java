@@ -5,7 +5,6 @@ import Tetris.Model.Shapes.*;
 import Tetris.Model.Shapes.Shape;
 import Tetris.View.GameFrame;
 
-import javax.swing.*;
 import java.awt.*;
 import java.util.Observable;
 import java.util.Observer;
@@ -98,21 +97,12 @@ public class GameHandler implements Observer {
 
         switch (input.substring(0,3)){
             case "new":
-                updateShape();
-                gameFrame.getMap().updateSetMap();
-                renderMap();
-
-                takeInput = true;
-
-                rowHandler.checkFullRow();
+                makeNextShape();
                 break;
             case "key":
                 switch (input.substring(3,4)){
                     case "s":
-                        if (takeInput){
-                            takeInput = false;
-                            //TODO change speed of timer
-                        }
+
                         break;
                     case "a":
                         if (takeInput){
@@ -199,5 +189,15 @@ public class GameHandler implements Observer {
                         break;
                 }
         }
+    }
+
+    public void makeNextShape(){
+        updateShape();
+        gameFrame.getMap().updateSetMap();
+        renderMap();
+
+        takeInput = true;
+
+        rowHandler.checkFullRow();
     }
 }
